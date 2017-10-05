@@ -10,8 +10,9 @@ public class Fenster extends JFrame {
 
     public Fenster() {
         super("LayoutManager");
-        this.setSize(300,400);
+        this.setSize(400,400);
         this.initComponents();
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
     } // END Fenster()
