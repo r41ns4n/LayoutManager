@@ -4,7 +4,7 @@ public class Testklasse {
 
     public static void main(String[] args) {
 
-        LayoutManager lm = new LayoutManager();
+        new Fenster();
 
     } // END Main
 
