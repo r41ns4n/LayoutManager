@@ -5,7 +5,8 @@ import java.awt.*;
 
 public class Fenster extends JFrame {
 
-    private JPanel jPanelNorth, jPanelWest, jPanelSouth, jPanelEast, jPanelCenter;
+    private MeinJPanel jPanelNorth, jPanelWest, jPanelSouth, jPanelEast, jPanelCenter;
+    private JPanel jPanelFlowPanel;
 
     public Fenster() {
         super("LayoutManager");
@@ -17,11 +18,18 @@ public class Fenster extends JFrame {
 
     private void initComponents() {
         // GENERATE JPANELS
-        jPanelNorth = new JPanel("North");
-        jPanelWest = new JPanel("West");
-        jPanelSouth = new JPanel("South");
-        jPanelEast = new JPanel("East");
-        jPanelCenter = new JPanel("Center");
+        jPanelNorth = new MeinJPanel("North");
+        jPanelWest = new MeinJPanel("West");
+        jPanelSouth = new MeinJPanel("South");
+        jPanelEast = new MeinJPanel("East");
+        jPanelCenter = new MeinJPanel("Center");
+
+        // GENERATE NEW JPANEL WITH FLOWLAYOUT
+        jPanelFlowPanel = new JPanel();
+        jPanelFlowPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 30,50));
+        for(int i = 0; i < 5; i++) {
+            jPanelFlowPanel.add(new JLabel("Text" + (i + 1)));
+        } // END jPanelFlowPanel
 
         // ADD PANEL TO FRAME
         this.add(jPanelNorth, BorderLayout.NORTH);
@@ -29,6 +37,7 @@ public class Fenster extends JFrame {
         this.add(jPanelSouth, BorderLayout.SOUTH);
         this.add(jPanelEast, BorderLayout.EAST);
         this.add(jPanelCenter);
+        this.add(jPanelFlowPanel);
     } // END void initComponents()
 
 } // END class Fenster extends JFrame
