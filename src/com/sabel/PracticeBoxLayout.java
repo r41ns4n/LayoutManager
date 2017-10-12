@@ -1,17 +1,18 @@
 package com.sabel;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class PracticeBoxLayout extends JFrame {
 
-    private JPanel jPanelRadioButtons, jPanleButtons, jPanelColor;
+    private JPanel jPanelRadioButtons, jPanleButtons, jPanelColor, jPanelComboBox;
     private JButton jButtonRed, jButtonGreen, jButtonBlue;
     private JLabel jButtonLabelRed, jButtonLabelGreen, jButtonLabelBlue;
     private JRadioButton jRadioButtonRed, jRadioButtonGreen, jRadioButtonBlue;
+    private JComboBox<String> jComboBox;
     private ButtonGroup buttonGroup;
 
     public PracticeBoxLayout() {
@@ -19,174 +20,18 @@ public class PracticeBoxLayout extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(400, 400);
         this.initComponents();
+        this.initJComboBox();
         this.initEvents();
         this.setLocationRelativeTo(null);
+        //this.pack();
         this.setVisible(true);
     } // END PracticeBoxLayout()
 
-    private void initEvents() {
-        MeinMouseListener mouseListenerRed = new MeinMouseListener();
-        MeinMouseListener mouseListenerGreen = new MeinMouseListener();
-        MeinMouseListener mouseListenerBlue = new MeinMouseListener();
-        jButtonRed.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                jPanelColor.setBackground(new Color(255, 0, 0));
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-
-        jButtonGreen.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                jPanelColor.setBackground(new Color(0, 255, 0));
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-
-        jButtonBlue.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                jPanelColor.setBackground(new Color(0, 0, 255));
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        jRadioButtonRed.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                jPanelColor.setBackground(new Color(255, 0, 0));
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        jRadioButtonGreen.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                jPanelColor.setBackground(new Color(0, 255, 0));
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        jRadioButtonBlue.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                jPanelColor.setBackground(new Color(0, 0, 255));
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-    } // END void initEvents()
+    private void initJComboBox() {
+        String[] items = new String[]{"Red", "Green", "Blue"};
+        jComboBox = new JComboBox<>(items);
+        jPanelComboBox.add(jComboBox);
+    } // END void initJComboBox()
 
     private void initComponents() {
         // GENERATE BUTTONS
@@ -200,6 +45,7 @@ public class PracticeBoxLayout extends JFrame {
         jPanleButtons = new JPanel();
         jPanelColor = new JPanel();
         this.jPanelColor.setBackground(new Color(255, 0, 0));
+        jPanelComboBox = new JPanel();
 
         // GENERATE JLABELS
         jButtonLabelRed = new JLabel("Red");
@@ -227,26 +73,104 @@ public class PracticeBoxLayout extends JFrame {
         jPanleButtons.add(jButtonGreen);
         jPanleButtons.add(jButtonBlue);
 
+        // ACTIVATE BUTTON RED
+        jRadioButtonRed.setSelected(true);
+
         // ADD BUTTONGROUP TO JPANEL
         jPanelRadioButtons.add(jRadioButtonRed);
         jPanelRadioButtons.add(jRadioButtonGreen);
         jPanelRadioButtons.add(jRadioButtonBlue);
 
         // ADD PANLE TO FRAME
+        this.add(jPanelComboBox, BorderLayout.NORTH);
         this.add(jPanelRadioButtons, BorderLayout.WEST);
         this.add(jPanleButtons, BorderLayout.SOUTH);
         this.add(jPanelColor);
 
     } // END void initComponents()
 
-    // INNERCLASS
-    private class MeinMouseListener extends MouseAdapter {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            jPanelColor.setBackground(new Color(0, 0, 255));
-        } // END void mouseExited(MouseEvent e)
 
-    } // END INNERCLASS MeinMouseListener extends MouseAdapter
+    private void initEvents() {
+
+        this.jButtonRed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                red();
+            }
+        });
+
+        this.jRadioButtonRed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                red();
+            }
+        });
+
+        this.jButtonBlue.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                blue();
+            }
+        });
+
+        this.jRadioButtonBlue.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                blue();
+            }
+        });
+
+        this.jButtonGreen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                green();
+            }
+        });
+
+        this.jRadioButtonGreen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                green();
+            }
+        });
+
+        this.jComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(e.getActionCommand());
+                switch ((String) jComboBox.getSelectedItem()) {
+                    case "Red":
+                        red();
+                        break;
+                    case "Green":
+                        green();
+                        break;
+                    case "Blue":
+                        blue();
+                        break;
+                }
+            }
+        });
+
+    } // END void initEvents()
+
+    private void red() {
+        jPanelColor.setBackground(Color.RED);
+        jRadioButtonRed.setSelected(true);
+        jComboBox.setSelectedItem("Red");
+    } // END void red()
+
+    private void blue() {
+        jPanelColor.setBackground(Color.BLUE);
+        jRadioButtonBlue.setSelected(true);
+        jComboBox.setSelectedItem("Blue");
+    } // END void red()
+
+    private void green() {
+        jPanelColor.setBackground(Color.GREEN);
+        jRadioButtonGreen.setSelected(true);
+        jComboBox.setSelectedItem("Green");
+    } // END void red()
 
 
 } // END class PracticeBoxLayout
